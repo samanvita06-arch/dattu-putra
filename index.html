@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dattu-Putra — Elder Care, Reimagined</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      color: #1a1a1a;
+      background: #ffffff;
+    }
+
+    /* ── Nav ── */
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 2rem;
+      border-bottom: 1px solid #e8e8e8;
+      background: #ffffff;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .logo { display: flex; align-items: center; gap: 10px; }
+    .logo-icon {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: #1D9E75;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .logo-icon svg { width: 20px; height: 20px; fill: white; }
+    .logo-text { font-size: 18px; font-weight: 600; color: #1a1a1a; }
+    .logo-sub { font-size: 11px; color: #1D9E75; letter-spacing: 0.04em; }
+    .nav-links { display: flex; gap: 1.5rem; align-items: center; }
+    .nav-links a {
+      font-size: 14px; color: #555; text-decoration: none; cursor: pointer;
+    }
+    .nav-links a:hover { color: #1a1a1a; }
+    .btn-primary {
+      background: #1D9E75; color: white; border: none;
+      padding: 9px 20px; border-radius: 8px;
+      font-size: 14px; cursor: pointer; font-weight: 500;
+    }
+    .btn-primary:hover { background: #178a63; }
+    .btn-outline {
+      background: transparent; color: #1D9E75;
+      border: 1px solid #1D9E75;
+      padding: 9px 20px; border-radius: 8px;
+      font-size: 14px; cursor: pointer; font-weight: 500;
+    }
+    .btn-outline:hover { background: #f0fdf8; }
+
+    /* ── Hero ── */
+    .hero {
+      padding: 5rem 2rem 4rem;
+      text-align: center;
+      background: #ffffff;
+    }
+    .hero-tag {
+      display: inline-block;
+      background: #E1F5EE; color: #0F6E56;
+      font-size: 12px; padding: 5px 16px;
+      border-radius: 20px; margin-bottom: 1.4rem; font-weight: 500;
+    }
+    .hero h1 {
+      font-size: 44px; font-weight: 600; line-height: 1.2;
+      max-width: 640px; margin: 0 auto 1.2rem;
+    }
+    .hero h1 span { color: #1D9E75; }
+    .hero p {
+      font-size: 17px; color: #555;
+      max-width: 520px; margin: 0 auto 2.2rem; line-height: 1.7;
+    }
+    .hero-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+    /* ── Story bar ── */
+    .story-bar {
+      background: #FEF3EE;
+      border-left: 4px solid #D85A30;
+      padding: 1.2rem 1.8rem;
+      margin: 0 2rem 0;
+    }
+    .story-bar p {
+      font-size: 14px; color: #6b3320; line-height: 1.7; font-style: italic;
+    }
+    .story-bar strong { font-style: normal; color: #4A1B0C; }
+
+    /* ── Portals ── */
+    .portals {
+      padding: 4rem 2rem;
+      background: #f9f9f7;
+    }
+    .section-label {
+      text-align: center; font-size: 12px; color: #888;
+      text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.5rem;
+    }
+    .section-title {
+      text-align: center; font-size: 26px; font-weight: 600; margin-bottom: 2.5rem;
+    }
+    .portal-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 1.5rem; max-width: 760px; margin: 0 auto;
+    }
+    .portal-card {
+      background: #ffffff;
+      border: 1px solid #e8e8e8;
+      border-radius: 14px;
+      padding: 1.8rem;
+      transition: box-shadow 0.15s;
+    }
+    .portal-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.07); }
+    .portal-card.children { border-top: 3px solid #1D9E75; }
+    .portal-card.parents  { border-top: 3px solid #7F77DD; }
+    .portal-icon {
+      width: 48px; height: 48px;
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 1.1rem; font-size: 22px;
+    }
+    .portal-icon.g { background: #E1F5EE; }
+    .portal-icon.p { background: #EEEDFE; }
+    .portal-card h3 { font-size: 18px; font-weight: 600; margin-bottom: 0.5rem; }
+    .portal-card p  { font-size: 14px; color: #555; line-height: 1.65; margin-bottom: 1.2rem; }
+    .portal-badge {
+      display: inline-block; font-size: 11px;
+      padding: 4px 12px; border-radius: 20px; font-weight: 500;
+    }
+    .badge-g { background: #E1F5EE; color: #0F6E56; }
+    .badge-p { background: #EEEDFE; color: #3C3489; }
+    .portal-access {
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid #f0f0f0;
+    }
+    .portal-access ul {
+      list-style: none; padding: 0;
+      display: flex; flex-direction: column; gap: 6px;
+    }
+    .portal-access li {
+      font-size: 13px; color: #444;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .portal-access li::before { content: "✓"; color: #1D9E75; font-weight: 700; }
+    .portal-card.parents .portal-access li::before { color: #7F77DD; }
+
+    /* ── Features ── */
+    .features { padding: 4rem 2rem; background: #ffffff; }
+    .feat-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1.2rem; max-width: 760px; margin: 0 auto;
+    }
+    .feat-card {
+      background: #f9f9f7;
+      border-radius: 12px;
+      padding: 1.4rem;
+    }
+    .feat-icon { font-size: 24px; margin-bottom: 0.7rem; }
+    .feat-card h4 { font-size: 15px; font-weight: 600; margin-bottom: 0.4rem; }
+    .feat-card p  { font-size: 13px; color: #666; line-height: 1.55; }
+
+    /* ── How it works ── */
+    .how { padding: 4rem 2rem; background: #f9f9f7; }
+    .steps {
+      display: flex; gap: 0;
+      max-width: 760px; margin: 0 auto;
+      position: relative;
+    }
+    .steps::before {
+      content: "";
+      position: absolute;
+      top: 22px; left: 22px; right: 22px;
+      height: 2px; background: #E1F5EE; z-index: 0;
+    }
+    .step {
+      flex: 1; text-align: center; position: relative; z-index: 1; padding: 0 10px;
+    }
+    .step-num {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: #1D9E75; color: white;
+      font-size: 16px; font-weight: 600;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 0.8rem;
+    }
+    .step h4 { font-size: 14px; font-weight: 600; margin-bottom: 0.3rem; }
+    .step p  { font-size: 12px; color: #666; line-height: 1.5; }
+
+    /* ── CTA ── */
+    .cta {
+      padding: 4rem 2rem; text-align: center;
+      background: #1D9E75;
+    }
+    .cta h2 { font-size: 30px; font-weight: 600; color: white; margin-bottom: 0.8rem; }
+    .cta p  { font-size: 16px; color: rgba(255,255,255,0.8); margin-bottom: 2rem; }
+    .btn-white {
+      background: white; color: #0F6E56; border: none;
+      padding: 12px 28px; border-radius: 8px;
+      font-size: 15px; font-weight: 600; cursor: pointer;
+    }
+    .btn-white:hover { background: #f0fdf8; }
+
+    /* ── Footer ── */
+    .footer {
+      padding: 1.8rem 2rem;
+      border-top: 1px solid #e8e8e8;
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 13px; color: #888;
+    }
+    .footer-links { display: flex; gap: 1.2rem; }
+    .footer-links a { color: #888; text-decoration: none; }
+    .footer-links a:hover { color: #1a1a1a; }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      .nav-links a, .nav { flex-wrap: wrap; gap: 8px; }
+      .hero h1 { font-size: 30px; }
+      .portal-grid, .steps { grid-template-columns: 1fr; flex-direction: column; }
+      .steps::before { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="nav">
+    <div class="logo">
+      <div class="logo-icon">
+        <svg viewBox="0 0 24 24">
+          <path d="M12 21.593c-5.63-5.539-11-10.297-11-14.402 0-3.791 3.068-5.191 5.281-5.191 1.312 0 4.151.501 5.719 4.457 1.59-3.968 4.464-4.447 5.726-4.447 2.54 0 5.274 1.621 5.274 5.181 0 4.069-5.136 8.625-11 14.402z"/>
+        </svg>
+      </div>
+      <div>
+        <div class="logo-text">Dattu-Putra</div>
+        <div class="logo-sub">Elder care, reimagined</div>
+      </div>
+    </div>
+    <div class="nav-links">
+      <a href="#how">How it works</a>
+      <a href="#features">Features</a>
+      <a href="#portals">Portals</a>
+      <button class="btn-outline">Log in</button>
+      <button class="btn-primary">Get started</button>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-tag">Trusted elder care, wherever you are</div>
+    <h1>Your parents are safe.<br><span>You'll see it yourself.</span></h1>
+    <p>We connect your parents with trusted local caregivers — and give you live visibility, shopping help, and peace of mind, no matter how far away you are.</p>
+    <div class="hero-btns">
+      <button class="btn-primary">For children — hire a caregiver</button>
+      <button class="btn-outline">For parents — view your portal</button>
+    </div>
+  </section>
+
+  <!-- Story bar -->
+  <div class="story-bar">
+    <p><strong>Why we built this:</strong> We read a story about an elderly man whose body was found 3 months after he passed — discovered first by a thief who said nothing. No one knew. No one was watching. Dattu-Putra exists so that never happens again.</p>
+  </div>
+
+  <!-- Portals -->
+  <section class="portals" id="portals">
+    <div class="section-label">two portals, one platform</div>
+    <div class="section-title">Who are you?</div>
+    <div class="portal-grid">
+
+      <div class="portal-card children">
+        <div class="portal-icon g">👨‍💼</div>
+        <h3>Children's portal</h3>
+        <p>Hire caregivers, monitor live camera feeds, manage shopping orders, and track your parent's daily care — all from your phone, wherever you are.</p>
+        <span class="portal-badge badge-g">Full access</span>
+        <div class="portal-access">
+          <ul>
+            <li>Hire & manage caregivers</li>
+            <li>Live camera monitoring</li>
+            <li>Shopping cart & delivery</li>
+            <li>Access parent portal too</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="portal-card parents">
+        <div class="portal-icon p">🧓</div>
+        <h3>Parent's portal</h3>
+        <p>Simple, easy-to-use interface to see who is coming today, request groceries or medicines, and stay connected with your children.</p>
+        <span class="portal-badge badge-p">Simplified access</span>
+        <div class="portal-access">
+          <ul>
+            <li>See today's caregiver schedule</li>
+            <li>Request items (medicines, food)</li>
+            <li>Message your children</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="features" id="features">
+    <div class="section-label">key features</div>
+    <div class="section-title">Everything you need</div>
+    <div class="feat-grid">
+
+      <div class="feat-card">
+        <div class="feat-icon">📷</div>
+        <h4>Live camera feed</h4>
+        <p>Outdoor camera streams directly to your phone. Monitor anytime, from anywhere — no app switch needed.</p>
+      </div>
+
+      <div class="feat-card">
+        <div class="feat-icon">🛒</div>
+        <h4>Daily shopping</h4>
+        <p>Caregivers fetch medicines, vegetables, fruits and more once or twice a day. You approve the cart.</p>
+      </div>
+
+      <div class="feat-card">
+        <div class="feat-icon">🏠</div>
+        <h4>Local caregivers</h4>
+        <p>We hire verified localites from your parents' area — familiar faces, trusted people, nearby help.</p>
+      </div>
+
+      <div class="feat-card">
+        <div class="feat-icon">📱</div>
+        <h4>Dual portal</h4>
+        <p>Children get full access. Parents get a simplified, easy-to-navigate interface built just for them.</p>
+      </div>
+
+      <div class="feat-card">
+        <div class="feat-icon">💊</div>
+        <h4>Medicine tracking</h4>
+        <p>Never miss a refill. Add prescriptions to the shopping list and caregivers handle the pickup.</p>
+      </div>
+
+      <div class="feat-card">
+        <div class="feat-icon">🔔</div>
+        <h4>Daily check-ins</h4>
+        <p>Caregivers log daily updates so children always know how their parent is doing that day.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="how" id="how">
+    <div class="section-label">process</div>
+    <div class="section-title">How it works</div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h4>You sign up</h4>
+        <p>Children register and add their parent's details and location.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h4>We match a caregiver</h4>
+        <p>A verified local caregiver near your parent is assigned.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h4>Camera goes live</h4>
+        <p>Outdoor camera is set up and streamed to your phone.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <h4>Daily care begins</h4>
+        <p>Shopping, check-ins, and monitoring — every single day.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta">
+    <h2>Start caring from anywhere</h2>
+    <p>Join families who use Dattu-Putra to make sure no parent is ever alone.</p>
+    <button class="btn-white">Get started today</button>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <span>© 2025 Dattu-Putra. All rights reserved.</span>
+    <div class="footer-links">
+      <a href="#">Privacy</a>
+      <a href="#">Terms</a>
+      <a href="#">Contact</a>
+    </div>
+  </footer>
+
+</body>
+</html>
